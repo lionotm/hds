@@ -17,6 +17,7 @@ export const createResources = /* GraphQL */ `
           userId
           date
           timeslot
+          timeslotId
           title
           createdAt
           updatedAt
@@ -44,6 +45,7 @@ export const updateResources = /* GraphQL */ `
           userId
           date
           timeslot
+          timeslotId
           title
           createdAt
           updatedAt
@@ -71,6 +73,7 @@ export const deleteResources = /* GraphQL */ `
           userId
           date
           timeslot
+          timeslotId
           title
           createdAt
           updatedAt
@@ -92,6 +95,7 @@ export const createEvents = /* GraphQL */ `
       userId
       date
       timeslot
+      timeslotId
       resourceId {
         id
         name
@@ -119,6 +123,7 @@ export const updateEvents = /* GraphQL */ `
       userId
       date
       timeslot
+      timeslotId
       resourceId {
         id
         name
@@ -146,6 +151,7 @@ export const deleteEvents = /* GraphQL */ `
       userId
       date
       timeslot
+      timeslotId
       resourceId {
         id
         name

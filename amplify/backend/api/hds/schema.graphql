@@ -1,4 +1,4 @@
-type Resources @model {
+﻿type Resources @model {
   id: ID! 
   name: String! 
   resourceType: String!
@@ -11,6 +11,7 @@ type Events @model {
   userId: String!
   date: String! 
   timeslot: String!
+  timeslotId: String!
   resourceId: Resources! @connection(name: "EventResources")
   title: String!
 }

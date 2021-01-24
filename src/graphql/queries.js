@@ -14,6 +14,7 @@ export const getResources = /* GraphQL */ `
           userId
           date
           timeslot
+          timeslotId
           title
           createdAt
           updatedAt
@@ -54,6 +55,7 @@ export const getEvents = /* GraphQL */ `
       userId
       date
       timeslot
+      timeslotId
       resourceId {
         id
         name
@@ -83,6 +85,7 @@ export const listEventss = /* GraphQL */ `
         userId
         date
         timeslot
+        timeslotId
         resourceId {
           id
           name
