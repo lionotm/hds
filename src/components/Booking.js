@@ -5,7 +5,8 @@ import { createEvents } from '../graphql/mutations';
 import Resource from './Resource'
 import Calendar from './Calendar'
 import Timeslots from './Timeslots';
-import { listResourcess } from '../graphql/queries';
+import { listEventss, listResourcess } from '../graphql/queries';
+import BookingList from './BookingList';
 
 const timeslots = [
   {
@@ -22,7 +23,7 @@ const timeslots = [
   },
   {
     id: 3,
-    value: "12pm-11pm"
+    value: "12pm-1pm"
   },
   {
     id: 4,
@@ -41,7 +42,6 @@ const timeslots = [
 ]
 
 
-
 function Booking() {
   const [locations, setLocations] = useState("");
   const [resourceTypes, setResourceTypes] = useState("");
@@ -52,13 +52,14 @@ function Booking() {
 
   const [date, setDate] = useState("");
   const [bookingTimeSlots, setBookingTimeSlots] = useState([]);
+  const [bookedTimeSlotsId, setBookedTimeSlotsId] = useState([]);
 
-  const [bookingList, setBookingList] = useState([]);
+  //console.log("resourceid", resourceId)
+  //console.log("bookedtimeslotId", bookedTimeSlotsId)
+  //console.log("bookingTimeSlots", bookingTimeSlots)
 
-  console.log(date)
 
   // RESOURCES 
-
   // get id of resource
   useEffect(() => {
     const getResourceType = async () => {
@@ -77,9 +78,8 @@ function Booking() {
       }));
       const result2 = result.data.listResourcess.items;
       setResourceId(result2.map(a => a.id))
-      console.log("resourceid", String(resourceId))
-      console.log(bookingTimeSlots)
-
+      //console.log("resourceid", String(resourceId))
+      //console.log(bookingTimeSlots)
     }
     getResourceType();
 
@@ -93,7 +93,7 @@ function Booking() {
   const handleAddBooking = async e => {
     e.preventDefault()
 
-    // submit individual books based on the no. of timeslot
+    // submit individual bookings based on the no. of timeslot
     await bookingTimeSlots.map(slot => {
       const input = {
         userId: "test",
@@ -103,10 +103,31 @@ function Booking() {
         date: date,
         eventsResourceIdId: String(resourceId)
       }
-      console.log(input.timeslotId)
       API.graphql(graphqlOperation(createEvents, { input }))
     })
+    setBookingTimeSlots([])
   }
+
+  // update timeslots after state changes
+  useEffect(() => {
+    updateTimeSlots();
+  }, [resourceId, date, bookingTimeSlots])
+
+  const updateTimeSlots = async () => {
+    const result = await API.graphql(graphqlOperation(listEventss, {
+      filter: {
+        eventsResourceIdId: {
+          eq: String(resourceId)
+        },
+        date: {
+          eq: date
+        }
+      }
+    }));
+    const result2 = result.data.listEventss.items;
+    setBookedTimeSlotsId(result2.map(slot => slot.timeslotId))
+  }
+
 
   return (
     <div>
@@ -116,7 +137,6 @@ function Booking() {
         setLocations={setLocations}
         resourceTypes={resourceTypes}
         setResourceTypes={setResourceTypes}
-        resource={resource}
         setResource={setResource}
       />
       <Calendar
@@ -125,9 +145,8 @@ function Booking() {
       <Timeslots
         resourceId={resourceId}
         date={date}
-        handleAddBooking={handleAddBooking}
         setBookingTimeSlots={setBookingTimeSlots}
-        setTimeSlotsId={setTimeSlotsId}
+        bookedTimeSlotsId={bookedTimeSlotsId}
       />
 
       <form className="add-post" onSubmit={handleAddBooking}>
@@ -148,6 +167,9 @@ function Booking() {
         />
       </form>
 
+      <BookingList
+        updateTimeSlots={updateTimeSlots}
+      />
 
     </div>
   )

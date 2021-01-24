@@ -1,0 +1,12 @@
+.rowStyle {
+  background: #f4f4f4;
+  padding: 5px;
+  border: 1px #ccc dotted;
+  margin-left: 7%;
+  margin-right: 7%;
+}
+
+.text{
+  font-style: italic;
+  color: #0ca5e297;
+}

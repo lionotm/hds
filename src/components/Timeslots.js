@@ -8,24 +8,6 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { listEventss } from '../graphql/queries';
 
 
-import FormatBoldIcon from "@material-ui/icons/FormatBold";
-import FormatItalicIcon from "@material-ui/icons/FormatItalic";
-import FormatUnderlinedIcon from "@material-ui/icons/FormatUnderlined";
-import FormatColorFillIcon from "@material-ui/icons/FormatColorFill";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-
-
-//const slots = [
-//  "9am-10am",
-//  "10am-11am",
-//  "11am-12pm",
-//  "12pm-1pm",
-//  "1pm-2pm",
-//  "2pm-3pm",
-//  "3pm-4pm",
-//  "4pm-5pm"
-//]
-
 const timeslots = [
   {
     id: 0,
@@ -41,7 +23,7 @@ const timeslots = [
   },
   {
     id: 3,
-    value: "12pm-11pm"
+    value: "12pm-1pm"
   },
   {
     id: 4,
@@ -60,13 +42,13 @@ const timeslots = [
 ]
 
 
-
-function Timeslots({ setBookingTimeSlots, resourceId, date, handleAddBooking }) {
+function Timeslots({ setBookingTimeSlots, bookedTimeSlotsId, handleAddBooking }) {
   const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
 
-  const [bookedTimeSlots, setBookedTimeSlots] = useState([]);
+  // const [bookedTimeSlots, setBookedTimeSlots] = useState([]);
   const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
 
+  //console.log("selected timeslot", selectedTimeSlots)
 
   const handleTimeSlots = (event, values) => {
     setSelectedTimeSlots(values);
@@ -78,56 +60,33 @@ function Timeslots({ setBookingTimeSlots, resourceId, date, handleAddBooking }) 
     //console.log(values);
   };
 
-
-  // Get current booked timeslots
+  // Shows available timings left
   useEffect(() => {
-    const getTimeSlots = async () => {
-      const result = await API.graphql(graphqlOperation(listEventss, {
-        filter: {
-          eventsResourceIdId: {
-            eq: String(resourceId)
-          },
-          date: {
-            eq: date
-          }
+
+    setAvailableTimeSlots(timeslots.filter(x => !bookedTimeSlotsId.includes(x.id)))
+
+  }, [bookedTimeSlotsId, handleAddBooking, selectedTimeSlots])
+
+  // Subscriptions when create event
+  useEffect(() => {
+    const createEventListener = API.graphql(graphqlOperation(onCreateEvents))
+      .subscribe({
+        next: eventData => {
+          setSelectedTimeSlots([]);
+
+          //const newEvent = eventData.value.data.onCreateEvents
+          //const newEventTimeId = [newEvent.timeslotId]
+          //console.log(newEventTimeId)
+          //console.log(availableTimeSlots)
         }
-      }));
-      const result2 = result.data.listEventss.items;
-      setBookedTimeSlots(result2.map(slot => slot.timeslot))
-      //console.log("result", result)
-      // console.log("id", result2)
-      // console.log("booked", bookedTimeSlots)
-      // console.log("date", date)
-      // console.log("slots", slots)
-
-      //setAvailableTimeSlots(slots.filter(timeslot =>
-      //  !bookedTimeSlots.includes(timeslot)
-      //));
-      // console.log("avail", availableTimeSlots)
+      })
+    return () => {
+      //clean up subscription
+      createEventListener.unsubscribe()
     }
-    getTimeSlots();
+  })
 
-  }, [date, resourceId, handleAddBooking])
-
-
-
-
-  // Subscriptions
-  //useEffect(() => {
-  //  const createEventListener = API.graphql(graphqlOperation(onCreateEvents))
-  //    .subscribe({
-  //      next: eventData => {
-  //        const test = eventData.value.data.onCreateEvents
-  //        console.log(eventData) //returning NULL
-  //      }
-  //    })
-  //  return () => {
-  //    //clean up subscription
-  //    createEventListener.unsubscribe()
-  //  }
-  //})
-
-
+  console.log("avail time", availableTimeSlots)
 
   return (
     <div>
@@ -137,7 +96,7 @@ function Timeslots({ setBookingTimeSlots, resourceId, date, handleAddBooking }) 
       <div>
         <ToggleButtonGroup value={selectedTimeSlots} onChange={handleTimeSlots}>
 
-          {timeslots.map((slot, idx) => {
+          {availableTimeSlots.map((slot, idx) => {
             return (
               <ToggleButton
                 value={slot.value}
@@ -152,8 +111,42 @@ function Timeslots({ setBookingTimeSlots, resourceId, date, handleAddBooking }) 
         </ToggleButtonGroup>
       </div>
 
+
     </div>
   );
 }
 
 export default Timeslots
+
+
+  // Get current booked timeslots based on resources picked
+  //useEffect(() => {
+  //  const getTimeSlots = async () => {
+  //    const result = await API.graphql(graphqlOperation(listEventss, {
+  //      filter: {
+  //        eventsResourceIdId: {
+  //          eq: String(resourceId)
+  //        },
+  //        date: {
+  //          eq: date
+  //        }
+  //      }
+  //    }));
+  //    const result2 = result.data.listEventss.items;
+  //    setBookedTimeSlots(result2.map(slot => slot.timeslotId))
+  //    // console.log("result", result)
+  //    //console.log("bookedtimeId", bookedTimeSlots)
+  //    // console.log("bookedtime", result2.map(slot => slot.timeslot))
+  //    //console.log("date", date)
+
+
+  //    setAvailableTimeSlots(timeslots.filter(x => !bookedTimeSlots.includes(x.id)))
+  //    //console.log("avail", availableTimeSlots)
+  //  }
+  //  getTimeSlots();
+
+  //}, [date, resourceId, handleAddBooking])
+
+
+
+

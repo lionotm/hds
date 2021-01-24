@@ -11,7 +11,7 @@ type Events @model {
   userId: String!
   date: String! 
   timeslot: String!
-  timeslotId: String!
+  timeslotId: Int!
   resourceId: Resources! @connection(name: "EventResources")
   title: String!
 }
