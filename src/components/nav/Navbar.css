@@ -34,6 +34,11 @@
   font-size: 1.8rem;
 }
 
+.welcome {
+  color: #fff;
+  margin-left:1%;
+}
+
 .nav-menu {
   display: grid;
   grid-template-columns: repeat(4, auto);

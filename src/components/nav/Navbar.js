@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 import './Navbar.css';
 
-function Navbar({ signOut, userId, userName }) {
+function Navbar({ signOut, signIn, userId, signedIn }) {
   const [click, setClick] = useState(false);
   const [button2, setButton] = useState(true);
 
@@ -35,7 +35,6 @@ function Navbar({ signOut, userId, userName }) {
             HDS
             <i class='fas fa-th' />
           </Link>
-
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
@@ -46,12 +45,14 @@ function Navbar({ signOut, userId, userName }) {
                 Home
               </Link>
             </li>
-
-            <li className='nav-item'>
-              <Link to='/bookings' className='nav-links' onClick={closeMobileMenu}>
-                Bookings
+            {
+              signedIn &&
+              <li className='nav-item'>
+                <Link to='/bookings' className='nav-links' onClick={closeMobileMenu}>
+                  Bookings
               </Link>
-            </li>
+              </li>
+            }
             {userId === adminId &&
               <li className='nav-item'>
                 <Link to='/admin' className='nav-links' onClick={closeMobileMenu}>
@@ -59,23 +60,16 @@ function Navbar({ signOut, userId, userName }) {
               </Link>
               </li>
             }
-            {
-              userId &&
-              <li>
-                <Link className='nav-links-mobile' onClick={() => { closeMobileMenu(); signOut(); }}>
-                  Sign Out
-              </Link>
-              </li>
-            }
             <li>
-              <Link Link to='/sign-in' className='nav-links-mobile' onClick={closeMobileMenu} >
-                Sign In
+
+              <Link className='nav-links-mobile' onClick={() => { closeMobileMenu(); signedIn ? signOut() : signIn(); }}>
+                {signedIn ? "Sign out" : "Sign In"}
               </Link>
             </li>
-
           </ul>
-          {button2 && <Button buttonStyle='btn--outline'>Sign In</Button>}
-          {button2 && <Button buttonStyle='btn--outline' onClick={signOut}>Sign out</Button>}
+          {button2 && <Button buttonStyle='btn--outline' onClick={signedIn ? signOut : signIn}>
+            {signedIn ? "Sign out" : "Sign In"}
+          </Button>}
         </div>
       </nav >
     </>

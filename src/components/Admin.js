@@ -2,20 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createResources } from '../graphql/mutations';
 import './Resource.css';
+import './Booking.css'
 
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import { Calendar } from 'react-modern-calendar-datepicker';
+
+
 
 function Admin() {
 
   const [locationName, setLocation] = useState("");
   const [resourceType, setResourceType] = useState("");
   const [resourceName, setResource] = useState("");
-
-  const [selectedDayRange, setSelectedDayRange] = useState({
-    from: null,
-    to: null
-  });
+  const [selectedDay, setSelectedDay] = useState("");
 
   //useEffect(() => {
   //  Auth.currentUserInfo()
@@ -90,59 +89,68 @@ function Admin() {
 
 
   return (
-
     <div>
+      <div className="cards__container">
+        <div clasName="cards__wrapper">
+          <h2> Create a Resource:</h2>
 
-      <form className="add-resource" onSubmit={handleAddResource}>
-        <input
-          style={{ font: '10px' }}
-          type="text"
-          placeholder="Location"
-          name="Location"
-          required
-          value={locationName}
-          onChange={handleChangeLocation}
-        />
-        <input
-          style={{ font: '10px' }}
-          type="text"
-          placeholder="Resource Type"
-          name="Resource Type"
-          required
-          value={resourceType}
-          onChange={handleChangeResourceType}
-        />
-        <input
-          style={{ font: '10px' }}
-          type="text"
-          placeholder="Resource"
-          name="Resource"
-          required
-          value={resourceName}
-          onChange={handleChangeResource}
-        />
-        <input
-          type="submit"
-          className="btn"
-          value="Create Resource"
-          style={{ fontSize: '15px' }}
-        />
-      </form>
+          <form className="form-inline" onSubmit={handleAddResource}>
+            <label for="text">Location:   </label>
+            <input
+              style={{ width: '20%' }}
+              type="text"
+              placeholder="Location"
+              name="Location"
+              required
+              value={locationName}
+              onChange={handleChangeLocation}
+            />
 
-      {/*<Calendar
-        value={selectedDayRange}
-        onChange={setSelectedDayRange}
-        //inputPlaceholder="Please select a day"
-        minimumDate={minimumDate}
-        disabledDays={disabledDays} // here we pass them
-        shouldHighlightWeekends
-        calendarClassName="responsive-calendar"
-      />*/}
+            <label for="text">Resource Type: </label>
+            <input
+              style={{ width: '20%' }}
+              type="text"
+              placeholder="Resource Type"
+              name="Resource Type"
+              required
+              value={resourceType}
+              onChange={handleChangeResourceType}
+            />
+            <label for="text">Resource: </label>
+            <input
+              style={{ width: '20%' }}
+              type="text"
+              placeholder="Resource"
+              name="Resource"
+              required
+              value={resourceName}
+              onChange={handleChangeResource}
+            />
+            <input
+              type="submit"
+              className="btn"
+              value="Create Resource"
+              style={{ fontSize: '15px' }}
+            />
+          </form>
+          <h2> Block out a full day: </h2>
+          <Calendar
+            value={selectedDay}
+            onChange={setSelectedDay}
+            minimumDate={minimumDate}
+            disabledDays={disabledDays} // here we pass them
+            shouldHighlightWeekends
+            calendarClassName="responsive-calendar"
+          />
+          <button className='btn btn--medium'
+            style={{ marginTop: "2%", marginLeft: "3%" }}
+          >
+            Block a day
+          </button>
+        </div>
+      </div>
 
-      <button>
-        Disable Date(s)
-      </button>
-    </div>
+    </div >
   )
 }
 

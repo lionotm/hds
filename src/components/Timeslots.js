@@ -88,9 +88,7 @@ function Timeslots({ setBookingTimeSlots, bookedTimeSlotsId, handleAddBooking })
 
   return (
     <div>
-      <h1>Step 3:</h1>
-      <p>Pick a Timeslot</p>
-
+      <h2>Step 3: Pick a timeslot</h2>
       <div>
         <ToggleButtonGroup value={selectedTimeSlots} onChange={handleTimeSlots}>
 

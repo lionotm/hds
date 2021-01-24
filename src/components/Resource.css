@@ -1,13 +1,14 @@
 /**
  * Main wrapper
  */
-h1 {
+h2 {
   display: flex;
   flex-direction: row;
-  padding: 15px;
-  margin: 20px;
+  padding: 5px;
+  margin: 1%;
   justify-content: left;
 }
+
 
 p {
   font-size: 1.2rem;
@@ -16,6 +17,7 @@ p {
 
 .dropdown {
   margin: 20px;
+  margin-bottom: 20%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -23,17 +25,22 @@ p {
 
 .cards__container {
   display: flex;
-  flex-flow: row;
+  flex-flow: column;
   align-items: flex-start;
   max-width: 1120px;
-  width: 90%;
   margin: 0 auto;
 }
 
 .cards__wrapper {
   position: relative;
-  margin: 50px 0 45px;
+  margin: 20px 0 20px;
+  flex-wrap: wrap;
 }
+
+.cards__items {
+  margin-bottom: 24px;
+}
+
 
 
  .select-search {

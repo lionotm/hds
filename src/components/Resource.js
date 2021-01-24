@@ -66,7 +66,7 @@ function Resource({ setResource, setResourceTypes, resourceTypes, setLocations, 
 
   return (
     <>
-      <h1>Step 1: </h1>
+      <h2>Step 1: </h2>
       <div className="cards__container">
         <div className="cards__wrapper">
           <p>Select an Area</p>

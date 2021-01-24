@@ -48,8 +48,7 @@ function PickDate({ setDate }) {
 
   return (
     <>
-      <h1>Step 2: </h1>
-      <p className="pickdate">Pick a Date</p>
+      <h2>Step 2: Pick a date</h2>
       <Calendar
         value={selectedDay}
         onChange={setSelectedDay}

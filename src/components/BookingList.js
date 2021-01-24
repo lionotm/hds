@@ -4,12 +4,13 @@ import { listEventss } from '../graphql/queries';
 import { deleteEvents } from '../graphql/mutations'
 import './BookingList.css'
 import { onCreateEvents, onDeleteEvents } from '../graphql/subscriptions';
+import Calendar from './Calendar'
+
 
 function BookingList({ updateTimeSlots, userId, userName }) {
-
   const [bookingList, setBookingList] = useState([]);
-
   const adminId = "a2cda53a-aa2b-49b0-a442-4e1bd7668150"
+
 
   useEffect(() => {
     const getTimeSlots = async () => {
@@ -84,7 +85,7 @@ function BookingList({ updateTimeSlots, userId, userName }) {
           <p> {"Resource Type: "} {booking.resourceId.resourceType} </p>
           <p> {"Resource: "} {booking.resourceId.name} </p>
           <p> {"Created by: "}{booking.userId} {" @ "} {booking.createdAt} </p>
-          <button onClick={() => handleDeleteEvent(booking.id)} >
+          <button className="btn btn-medium" onClick={() => handleDeleteEvent(booking.id)} >
             Delete Booking
           </button>
         </div>

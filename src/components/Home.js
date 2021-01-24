@@ -1,12 +1,14 @@
-import React from 'react';
+import React from 'react'
 
-
-function Home() {
+function Home({ userName, signedIn }) {
   return (
-    <>
-      <h1>Welcome</h1>
-    </>
-  );
+    signedIn ?
+      <h2>
+        Welcome {userName},
+      </h2>
+      : ""
+
+  )
 }
 
-export default Home;
+export default Home

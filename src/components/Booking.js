@@ -7,6 +7,7 @@ import Calendar from './Calendar'
 import Timeslots from './Timeslots';
 import { listEventss, listResourcess } from '../graphql/queries';
 import BookingList from './BookingList';
+import './Booking.css'
 
 const timeslots = [
   {
@@ -127,50 +128,61 @@ function Booking({ userId, userName }) {
 
 
   return (
-    <div>
+    <div className="">
+      <div className="cards__container">
+        <div clasName="cards__wrapper">
+          <h2>Welcome {userName}, </h2>
+          <ul className='cards__items'>
+            <Resource
+              locations={locations}
+              setLocations={setLocations}
+              resourceTypes={resourceTypes}
+              setResourceTypes={setResourceTypes}
+              setResource={setResource}
+            />
+            <Calendar
+              setDate={setDate}
+            />
+          </ul>
+          <ul>
+            <Timeslots
+              resourceId={resourceId}
+              date={date}
+              setBookingTimeSlots={setBookingTimeSlots}
+              bookedTimeSlotsId={bookedTimeSlotsId}
+            />
+          </ul>
 
-      <Resource
-        locations={locations}
-        setLocations={setLocations}
-        resourceTypes={resourceTypes}
-        setResourceTypes={setResourceTypes}
-        setResource={setResource}
-      />
-      <Calendar
-        setDate={setDate}
-      />
-      <Timeslots
-        resourceId={resourceId}
-        date={date}
-        setBookingTimeSlots={setBookingTimeSlots}
-        bookedTimeSlotsId={bookedTimeSlotsId}
-      />
 
-      <form className="add-post" onSubmit={handleAddBooking}>
-        <input
-          style={{ font: '19px' }}
-          type="text"
-          placeholder="Purpose of Booking"
-          name="Purpose"
-          required
-          value={purpose}
-          onChange={handleChangePurpose}
-        />
-        <input
-          type="submit"
-          className="btn"
-          value="Book Resource"
-          style={{ fontSize: '15px' }}
-        />
-      </form>
+          <form className="form-inline" onSubmit={handleAddBooking}>
+            <label for="text">Purpose: </label>
+            <input
+              style={{ width: '70%' }}
+              type="text"
+              placeholder="Purpose of Booking"
+              name="Purpose"
+              required
+              value={purpose}
+              onChange={handleChangePurpose}
+            />
+            <input
+              type="submit"
+              className="btn"
+              value="Book Resource"
+              style={{ fontSize: '14px', width: '15%' }}
+            />
+          </form>
 
-      <BookingList
-        updateTimeSlots={updateTimeSlots}
-        userId={userId}
-        userName={userName}
-      />
+          <BookingList
+            updateTimeSlots={updateTimeSlots}
+            userId={userId}
+            userName={userName}
+          />
 
-    </div>
+        </div>
+      </div>
+
+    </div >
   )
 }
 
