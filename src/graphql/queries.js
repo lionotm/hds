@@ -12,6 +12,7 @@ export const getResources = /* GraphQL */ `
         items {
           id
           userId
+          userName
           date
           timeslot
           timeslotId
@@ -53,6 +54,7 @@ export const getEvents = /* GraphQL */ `
     getEvents(id: $id) {
       id
       userId
+      userName
       date
       timeslot
       timeslotId
@@ -83,6 +85,7 @@ export const listEventss = /* GraphQL */ `
       items {
         id
         userId
+        userName
         date
         timeslot
         timeslotId

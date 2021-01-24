@@ -86,8 +86,6 @@ function Timeslots({ setBookingTimeSlots, bookedTimeSlotsId, handleAddBooking })
     }
   })
 
-  console.log("avail time", availableTimeSlots)
-
   return (
     <div>
       <h1>Step 3:</h1>
@@ -118,34 +116,6 @@ function Timeslots({ setBookingTimeSlots, bookedTimeSlotsId, handleAddBooking })
 
 export default Timeslots
 
-
-  // Get current booked timeslots based on resources picked
-  //useEffect(() => {
-  //  const getTimeSlots = async () => {
-  //    const result = await API.graphql(graphqlOperation(listEventss, {
-  //      filter: {
-  //        eventsResourceIdId: {
-  //          eq: String(resourceId)
-  //        },
-  //        date: {
-  //          eq: date
-  //        }
-  //      }
-  //    }));
-  //    const result2 = result.data.listEventss.items;
-  //    setBookedTimeSlots(result2.map(slot => slot.timeslotId))
-  //    // console.log("result", result)
-  //    //console.log("bookedtimeId", bookedTimeSlots)
-  //    // console.log("bookedtime", result2.map(slot => slot.timeslot))
-  //    //console.log("date", date)
-
-
-  //    setAvailableTimeSlots(timeslots.filter(x => !bookedTimeSlots.includes(x.id)))
-  //    //console.log("avail", availableTimeSlots)
-  //  }
-  //  getTimeSlots();
-
-  //}, [date, resourceId, handleAddBooking])
 
 
 

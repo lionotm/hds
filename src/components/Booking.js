@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { API, Auth, graphqlOperation } from 'aws-amplify';
+import { API, graphqlOperation } from 'aws-amplify';
 import { createEvents } from '../graphql/mutations';
 
 import Resource from './Resource'
@@ -41,15 +41,12 @@ const timeslots = [
   },
 ]
 
-
-function Booking() {
+function Booking({ userId, userName }) {
   const [locations, setLocations] = useState("");
   const [resourceTypes, setResourceTypes] = useState("");
   const [resource, setResource] = useState("");
   const [resourceId, setResourceId] = useState("");
-
   const [purpose, setPurpose] = useState("");
-
   const [date, setDate] = useState("");
   const [bookingTimeSlots, setBookingTimeSlots] = useState([]);
   const [bookedTimeSlotsId, setBookedTimeSlotsId] = useState([]);
@@ -57,7 +54,6 @@ function Booking() {
   //console.log("resourceid", resourceId)
   //console.log("bookedtimeslotId", bookedTimeSlotsId)
   //console.log("bookingTimeSlots", bookingTimeSlots)
-
 
   // RESOURCES 
   // get id of resource
@@ -96,8 +92,9 @@ function Booking() {
     // submit individual bookings based on the no. of timeslot
     await bookingTimeSlots.map(slot => {
       const input = {
-        userId: "test",
-        title: "123",
+        userId: userId,
+        userName: userName,
+        title: purpose,
         timeslot: slot,
         timeslotId: timeslots.filter(timeObj => slot.includes(timeObj.value)).map(timeslot => timeslot.id)[0],
         date: date,
@@ -169,6 +166,8 @@ function Booking() {
 
       <BookingList
         updateTimeSlots={updateTimeSlots}
+        userId={userId}
+        userName={userName}
       />
 
     </div>

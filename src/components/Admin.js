@@ -6,7 +6,7 @@ import './Resource.css';
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import { Calendar } from 'react-modern-calendar-datepicker';
 
-function AdminCreateResource() {
+function Admin() {
 
   const [locationName, setLocation] = useState("");
   const [resourceType, setResourceType] = useState("");
@@ -54,7 +54,6 @@ function AdminCreateResource() {
     setResource("")
   }
 
-  console.log(selectedDayRange)
 
   const handleDisableDates = async e => {
     e.preventDefault()
@@ -130,7 +129,7 @@ function AdminCreateResource() {
         />
       </form>
 
-      <Calendar
+      {/*<Calendar
         value={selectedDayRange}
         onChange={setSelectedDayRange}
         //inputPlaceholder="Please select a day"
@@ -138,7 +137,7 @@ function AdminCreateResource() {
         disabledDays={disabledDays} // here we pass them
         shouldHighlightWeekends
         calendarClassName="responsive-calendar"
-      />
+      />*/}
 
       <button>
         Disable Date(s)
@@ -147,4 +146,4 @@ function AdminCreateResource() {
   )
 }
 
-export default AdminCreateResource
+export default Admin

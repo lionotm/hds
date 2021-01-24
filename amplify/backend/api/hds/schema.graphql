@@ -9,6 +9,7 @@
 type Events @model {
   id: ID!
   userId: String!
+  userName: String
   date: String! 
   timeslot: String!
   timeslotId: Int!

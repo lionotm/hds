@@ -1,24 +1,24 @@
-import { API, graphqlOperation } from 'aws-amplify';
+import { API, graphqlOperation, Auth } from 'aws-amplify';
 import React, { useState, useEffect } from 'react'
 import { listEventss } from '../graphql/queries';
 import { deleteEvents } from '../graphql/mutations'
 import './BookingList.css'
 import { onCreateEvents, onDeleteEvents } from '../graphql/subscriptions';
 
-function BookingList({ updateTimeSlots }) {
-
-  const id = "admin" // for admin to see all bookings
+function BookingList({ updateTimeSlots, userId, userName }) {
 
   const [bookingList, setBookingList] = useState([]);
+
+  const adminId = "a2cda53a-aa2b-49b0-a442-4e1bd7668150"
 
   useEffect(() => {
     const getTimeSlots = async () => {
       const result = await API.graphql(graphqlOperation(listEventss,
-        id !== "admin"
+        userId !== adminId
           ? {
             filter: {
               userId: {
-                eq: "test"
+                eq: userId
               }
             }
           } : ""
@@ -28,7 +28,7 @@ function BookingList({ updateTimeSlots }) {
       // console.log(result2)
     }
     getTimeSlots();
-  }, [bookingList])
+  }, [bookingList, userId])
 
   const handleDeleteEvent = async eventId => {
     const input = {
@@ -76,7 +76,7 @@ function BookingList({ updateTimeSlots }) {
   return (
     bookingList.map((booking, idx) => {
       return (
-        <div className="rowStyle" key={booking.id} >
+        <div className="rowStyle" key={booking.id + userId} >
           <p> {"Title: "}{booking.title}</p>
           <p> {"Date: "}{booking.date}</p>
           <p> {"Timeslot: "}{booking.timeslot}</p>
@@ -84,8 +84,11 @@ function BookingList({ updateTimeSlots }) {
           <p> {"Resource Type: "} {booking.resourceId.resourceType} </p>
           <p> {"Resource: "} {booking.resourceId.name} </p>
           <p> {"Created by: "}{booking.userId} {" @ "} {booking.createdAt} </p>
-          <button onClick={() => handleDeleteEvent(booking.id)} > Delete Booking </button>
+          <button onClick={() => handleDeleteEvent(booking.id)} >
+            Delete Booking
+          </button>
         </div>
+
       )
     })
   )
