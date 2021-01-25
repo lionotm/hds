@@ -9,7 +9,7 @@ import tachyons from 'tachyons';
 
 function BookingList({ updateTimeSlots, userId, userName }) {
   const [bookingList, setBookingList] = useState([]);
-  const adminId = "a2cda53a-aa2b-49b0-a442-4e1bd7668150"
+  const adminId = "e31227a5-4324-4c3a-a23e-c0f38167ae23"
 
   useEffect(() => {
     const getTimeSlots = async () => {
@@ -21,7 +21,7 @@ function BookingList({ updateTimeSlots, userId, userName }) {
                 eq: userId
               }
             }
-          } : ""
+          } : {}
       )); try {
         const result2 = result.data.listEventss.items;
         setBookingList(result2)

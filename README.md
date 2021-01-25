@@ -21,6 +21,9 @@ This is a POC project to create a booking system prototype to assist with the bo
 - AWS Cognito
 - AWS DynaoDB
 
+## Known Issues
+- AWS GraphQL schema automatic updates results in missing field after every publish which causes some failed queries. Have to edit the schema manually in Appsync console.
+
 
 ## To Install
 
