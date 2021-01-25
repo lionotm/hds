@@ -89,6 +89,7 @@ function BookingList({ updateTimeSlots, userId, userName }) {
                 <th className="fw6 tl pa3 bg-white">Date</th>
                 <th className="fw6 tl pa3 bg-white">Details</th>
                 <th className="fw6 tl pa3 bg-white">Timeslot</th>
+                <th className="fw6 tl pa3 bg-white">Created By</th>
               </tr>
             </thead>
             <tbody className="lh-copy">
@@ -99,6 +100,7 @@ function BookingList({ updateTimeSlots, userId, userName }) {
                     <td className="pa3">{booking.date}</td>
                     <td className="pa3">{booking.resourceId.locationName}{", "}{booking.resourceId.resourceType}{", "}{booking.resourceId.name}</td>
                     <td className="pa3">{booking.timeslot}</td>
+                    <td className="pa3">{booking.userName}</td>
 
                     <td className="pa3 dim dib red" onClick={() => handleDeleteEvent(booking.id)} >
                       Delete Booking

@@ -24,6 +24,10 @@ This is a POC project to create a booking system prototype to assist with the bo
 ## Known Issues
 - AWS GraphQL schema automatic updates results in missing field after every publish which causes some failed queries. Have to edit the schema manually in Appsync console.
 
+## Features to add
+- Admin block out whole day/days
+- Book several timeslots at once
+
 
 ## To Install
 

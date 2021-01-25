@@ -94,19 +94,17 @@ function Booking({ userId, userName }) {
   const handleAddBooking = async e => {
     e.preventDefault()
 
-    // submit individual bookings based on the no. of timeslot
-    await Promise.all(bookingTimeSlots.map(slot => {
-      const input = {
-        userId: userId,
-        userName: userName,
-        title: purpose,
-        timeslot: slot,
-        timeslotId: timeslots.filter(timeObj => slot.includes(timeObj.value)).map(timeslot => timeslot.id)[0],
-        date: date,
-        eventsResourceIdId: String(resourceId)
-      }
-      API.graphql(graphqlOperation(createEvents, { input }))
-    }))
+    const input = {
+      userId: userId,
+      userName: userName,
+      title: purpose,
+      timeslot: timeslots.filter(timeObj => bookingTimeSlots.includes(timeObj.value)).map(timeslot => timeslot.value)[0],
+      //timeslotId: timeslots,
+      timeslotId: timeslots.filter(timeObj => bookingTimeSlots.includes(timeObj.value)).map(timeslot => timeslot.id)[0],
+      date: date,
+      eventsResourceIdId: String(resourceId)
+    }
+    await API.graphql(graphqlOperation(createEvents, { input }))
     setBookingTimeSlots([])
   }
 

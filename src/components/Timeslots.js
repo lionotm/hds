@@ -88,7 +88,7 @@ function Timeslots({ setBookingTimeSlots, bookedTimeSlotsId, handleAddBooking })
     <div>
       <h2>Step 3: Pick a timeslot</h2>
       <div>
-        <ToggleButtonGroup value={selectedTimeSlots} onChange={handleTimeSlots}>
+        <ToggleButtonGroup value={selectedTimeSlots} onChange={handleTimeSlots} exclusive>
           {availableTimeSlots.map((slot, idx) => {
             return (
               <ToggleButton
