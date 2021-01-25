@@ -4,13 +4,12 @@ import { listEventss } from '../graphql/queries';
 import { deleteEvents } from '../graphql/mutations'
 import './BookingList.css'
 import { onCreateEvents, onDeleteEvents } from '../graphql/subscriptions';
-import Calendar from './Calendar'
+import tachyons from 'tachyons'
 
 
 function BookingList({ updateTimeSlots, userId, userName }) {
   const [bookingList, setBookingList] = useState([]);
   const adminId = "a2cda53a-aa2b-49b0-a442-4e1bd7668150"
-
 
   useEffect(() => {
     const getTimeSlots = async () => {
@@ -23,13 +22,16 @@ function BookingList({ updateTimeSlots, userId, userName }) {
               }
             }
           } : ""
-      ));
-      const result2 = result.data.listEventss.items;
-      setBookingList(result2)
-      // console.log(result2)
+      )); try {
+        const result2 = result.data.listEventss.items;
+        setBookingList(result2)
+        // console.log(result2)
+      } catch (error) {
+        console.log(error)
+      }
     }
     getTimeSlots();
-  }, [bookingList, userId])
+  }, [])
 
   const handleDeleteEvent = async eventId => {
     const input = {
@@ -75,23 +77,41 @@ function BookingList({ updateTimeSlots, userId, userName }) {
 
 
   return (
-    bookingList.map((booking, idx) => {
-      return (
-        <div className="rowStyle" key={booking.id + userId} >
-          <p> {"Title: "}{booking.title}</p>
-          <p> {"Date: "}{booking.date}</p>
-          <p> {"Timeslot: "}{booking.timeslot}</p>
-          <p> {"Location: "} {booking.resourceId.locationName} </p>
-          <p> {"Resource Type: "} {booking.resourceId.resourceType} </p>
-          <p> {"Resource: "} {booking.resourceId.name} </p>
-          <p> {"Created by: "}{booking.userId} {" @ "} {booking.createdAt} </p>
-          <button className="btn btn-medium" onClick={() => handleDeleteEvent(booking.id)} >
-            Delete Booking
-          </button>
-        </div>
+    <div>
+      <h2>Your Bookings:</h2>
+      <div class="pa3">
+        <div class="overflow-auto">
+          <table class="f5 w-100 mw8 center" cellspacing="0">
+            <thead>
+              <tr class="stripe-dark">
+                <th class="fw6 tl pa3 bg-white">Title</th>
+                <th class="fw6 tl pa3 bg-white">Date</th>
+                <th class="fw6 tl pa3 bg-white">Details</th>
+                <th class="fw6 tl pa3 bg-white">Timeslot</th>
+              </tr>
+            </thead>
+            <tbody class="lh-copy">
+              {bookingList.map((booking, idx) => {
+                return (
+                  <tr class="stripe-dark" key={booking.id + userId}  >
+                    <td class="pa3">{booking.title}</td>
+                    <td class="pa3">{booking.date}</td>
+                    <td class="pa3">{booking.resourceId.locationName}{", "}{booking.resourceId.resourceType}{", "}{booking.resourceId.name}</td>
+                    <td class="pa3">{booking.timeslot}</td>
 
-      )
-    })
+                    <button className="pa3 dim dib " onClick={() => handleDeleteEvent(booking.id)} >
+                      Delete Booking
+                    </button>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
   )
 }
 

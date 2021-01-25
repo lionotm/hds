@@ -62,9 +62,9 @@ function Navbar({ signOut, signIn, userId, signedIn }) {
             }
             <li>
 
-              <Link className='nav-links-mobile' onClick={() => { closeMobileMenu(); signedIn ? signOut() : signIn(); }}>
+              <div className='nav-links-mobile' onClick={() => { closeMobileMenu(); signedIn ? signOut() : signIn(); }}>
                 {signedIn ? "Sign out" : "Sign In"}
-              </Link>
+              </div>
             </li>
           </ul>
           {button2 && <Button buttonStyle='btn--outline' onClick={signedIn ? signOut : signIn}>
