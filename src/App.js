@@ -15,12 +15,6 @@ function App() {
   const [user, setUser] = useState(null);
   const [signedIn, setSignedIn] = useState(false)
 
-  const checkUser = () => {
-    Auth.currentAuthenticatedUser()
-      .then(user => console.log(user))
-      .catch(err => console.log(err))
-  }
-
   const signOut = () => {
     Auth.signOut()
       .then(data => {
@@ -71,7 +65,6 @@ function App() {
   return (
     <div className="bgimage">
       <div>
-        <button onClick={checkUser}>Check User</button>
         <Router>
           <Navbar
             signIn={signIn}

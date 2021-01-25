@@ -7,12 +7,7 @@ import './Resource.css';
 
 function Resource({ setResource, setResourceTypes, resourceTypes, setLocations, locations }) {
   const [resources, setResources] = useState([]);
-  //const [locations, setLocations] = useState("");
-  //const [resourceTypes, setResourceTypes] = useState("");
-  //const [resource, setResource] = useState("");
   const [resourceFilter, setResourceFilter] = useState([]);
-
-
 
   // Get all resources
   useEffect(() => {

@@ -5,8 +5,6 @@ import ScheduleIcon from '@material-ui/icons/Schedule';
 import './Timeslots.css'
 import { onCreateEvents } from '../graphql/subscriptions';
 import { API, graphqlOperation } from 'aws-amplify';
-import { listEventss } from '../graphql/queries';
-
 
 const timeslots = [
   {
@@ -91,19 +89,16 @@ function Timeslots({ setBookingTimeSlots, bookedTimeSlotsId, handleAddBooking })
       <h2>Step 3: Pick a timeslot</h2>
       <div>
         <ToggleButtonGroup value={selectedTimeSlots} onChange={handleTimeSlots}>
-
           {availableTimeSlots.map((slot, idx) => {
             return (
               <ToggleButton
                 value={slot.value}
                 key={slot.id}
               >
-                <ScheduleIcon />
                 <p> {slot.value} </p>
               </ToggleButton>
             )
           })}
-
         </ToggleButtonGroup>
       </div>
 

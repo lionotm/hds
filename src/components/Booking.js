@@ -72,11 +72,15 @@ function Booking({ userId, userName }) {
             contains: resource
           }
         }
-      }));
-      const result2 = result.data.listResourcess.items;
-      setResourceId(result2.map(a => a.id))
-      //console.log("resourceid", String(resourceId))
-      //console.log(bookingTimeSlots)
+      })); try {
+        const result2 = result.data.listResourcess.items;
+        setResourceId(result2.map(a => a.id))
+        //console.log("resourceid", String(resourceId))
+        //console.log(bookingTimeSlots)
+      } catch (error) {
+        console.log(error)
+        setResourceId(resourceId);
+      }
     }
     getResourceType();
 
@@ -91,7 +95,7 @@ function Booking({ userId, userName }) {
     e.preventDefault()
 
     // submit individual bookings based on the no. of timeslot
-    await bookingTimeSlots.map(slot => {
+    await Promise.all(bookingTimeSlots.map(slot => {
       const input = {
         userId: userId,
         userName: userName,
@@ -102,7 +106,7 @@ function Booking({ userId, userName }) {
         eventsResourceIdId: String(resourceId)
       }
       API.graphql(graphqlOperation(createEvents, { input }))
-    })
+    }))
     setBookingTimeSlots([])
   }
 
@@ -130,8 +134,7 @@ function Booking({ userId, userName }) {
   return (
     <div className="">
       <div className="cards__container">
-        <div clasName="cards__wrapper">
-          <h2>Welcome {userName}, </h2>
+        <div className="cards__wrapper">
           <ul className='cards__items'>
             <Resource
               locations={locations}

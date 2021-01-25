@@ -1,10 +1,10 @@
-import { API, graphqlOperation, Auth } from 'aws-amplify';
+import { API, graphqlOperation } from 'aws-amplify';
 import React, { useState, useEffect } from 'react'
 import { listEventss } from '../graphql/queries';
 import { deleteEvents } from '../graphql/mutations'
 import './BookingList.css'
 import { onCreateEvents, onDeleteEvents } from '../graphql/subscriptions';
-import tachyons from 'tachyons'
+import tachyons from 'tachyons';
 
 
 function BookingList({ updateTimeSlots, userId, userName }) {
@@ -28,10 +28,11 @@ function BookingList({ updateTimeSlots, userId, userName }) {
         // console.log(result2)
       } catch (error) {
         console.log(error)
+        setBookingList(bookingList)
       }
     }
     getTimeSlots();
-  }, [])
+  }, [bookingList])
 
   const handleDeleteEvent = async eventId => {
     const input = {
@@ -79,29 +80,29 @@ function BookingList({ updateTimeSlots, userId, userName }) {
   return (
     <div>
       <h2>Your Bookings:</h2>
-      <div class="pa3">
-        <div class="overflow-auto">
-          <table class="f5 w-100 mw8 center" cellspacing="0">
+      <div className="pa3">
+        <div className="overflow-auto">
+          <table className="f5 w-100 mw8 center" cellSpacing="0">
             <thead>
-              <tr class="stripe-dark">
-                <th class="fw6 tl pa3 bg-white">Title</th>
-                <th class="fw6 tl pa3 bg-white">Date</th>
-                <th class="fw6 tl pa3 bg-white">Details</th>
-                <th class="fw6 tl pa3 bg-white">Timeslot</th>
+              <tr className="stripe-dark">
+                <th className="fw6 tl pa3 bg-white">Title</th>
+                <th className="fw6 tl pa3 bg-white">Date</th>
+                <th className="fw6 tl pa3 bg-white">Details</th>
+                <th className="fw6 tl pa3 bg-white">Timeslot</th>
               </tr>
             </thead>
-            <tbody class="lh-copy">
+            <tbody className="lh-copy">
               {bookingList.map((booking, idx) => {
                 return (
-                  <tr class="stripe-dark" key={booking.id + userId}  >
-                    <td class="pa3">{booking.title}</td>
-                    <td class="pa3">{booking.date}</td>
-                    <td class="pa3">{booking.resourceId.locationName}{", "}{booking.resourceId.resourceType}{", "}{booking.resourceId.name}</td>
-                    <td class="pa3">{booking.timeslot}</td>
+                  <tr className="stripe-dark" key={booking.id + userId}  >
+                    <td className="pa3">{booking.title}</td>
+                    <td className="pa3">{booking.date}</td>
+                    <td className="pa3">{booking.resourceId.locationName}{", "}{booking.resourceId.resourceType}{", "}{booking.resourceId.name}</td>
+                    <td className="pa3">{booking.timeslot}</td>
 
-                    <button className="pa3 dim dib " onClick={() => handleDeleteEvent(booking.id)} >
+                    <td className="pa3 dim dib red" onClick={() => handleDeleteEvent(booking.id)} >
                       Delete Booking
-                    </button>
+                    </td>
                   </tr>
                 )
               })}

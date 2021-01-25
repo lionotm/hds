@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createResources } from '../graphql/mutations';
 import './Resource.css';
@@ -54,16 +54,16 @@ function Admin() {
   }
 
 
-  const handleDisableDates = async e => {
-    e.preventDefault()
+  //const handleDisableDates = async e => {
+  //  e.preventDefault()
 
-    //const input = {
-    //  day: ,
-    //  month: ,
-    //  year:
-    //}
+  //  //const input = {
+  //  //  day: ,
+  //  //  month: ,
+  //  //  year:
+  //  //}
 
-  }
+  //}
 
   // get today's date
   const today = new Date();
@@ -91,7 +91,7 @@ function Admin() {
   return (
     <div>
       <div className="cards__container">
-        <div clasName="cards__wrapper">
+        <div className="cards__wrapper">
           <h2> Create a Resource:</h2>
 
           <form className="form-inline" onSubmit={handleAddResource}>
@@ -133,7 +133,7 @@ function Admin() {
               style={{ fontSize: '15px' }}
             />
           </form>
-          <h2> Block out a full day: </h2>
+          {/*<h2> Block out a full day: </h2>
           <Calendar
             value={selectedDay}
             onChange={setSelectedDay}
@@ -146,7 +146,7 @@ function Admin() {
             style={{ marginTop: "2%", marginLeft: "3%" }}
           >
             Block a day
-          </button>
+          </button>*/}
         </div>
       </div>
 
