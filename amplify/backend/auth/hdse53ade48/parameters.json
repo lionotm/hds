@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "hdsc6c644fa_identitypool_c6c644fa",
+    "identityPoolName": "hdse53ade48_identitypool_e53ade48",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "hdsc6c644fa",
-    "userPoolName": "hdsc6c644fa_userpool_c6c644fa",
+    "resourceNameTruncated": "hdse53ade48",
+    "userPoolName": "hdse53ade48_userpool_e53ade48",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "hdsc6cc6c644fa_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "hdse53e53ade48_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "c6c644fa",
-    "resourceName": "hdsc6c644fa",
+    "sharedId": "e53ade48",
+    "resourceName": "hdse53ade48",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -47,15 +47,16 @@
     },
     "useDefault": "defaultSocial",
     "hostedUI": true,
-    "hostedUIDomainName": "hdsc6c644fa-c6c644fa",
+    "hostedUIDomainName": "hdse53ade48-e53ade48",
     "authProvidersUserPool": [
         "Facebook",
+        "Google",
         "LoginWithAmazon"
     ],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}},{\"ProviderName\":\"LoginWithAmazon\",\"authorize_scopes\":\"profile profile:user_id\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"user_id\"}}]",
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}},{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}},{\"ProviderName\":\"LoginWithAmazon\",\"authorize_scopes\":\"profile profile:user_id\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"user_id\"}}]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
-    "dependsOn": [],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://main.d5lnn4vwtx8z1.amplifyapp.com/\"],\"LogoutURLs\":[\"https://main.d5lnn4vwtx8z1.amplifyapp.com/\"]}"
+    "dependsOn": []
 }

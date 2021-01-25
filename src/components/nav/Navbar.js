@@ -10,7 +10,7 @@ function Navbar({ signOut, signIn, userId, signedIn }) {
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
-  const adminId = "a2cda53a-aa2b-49b0-a442-4e1bd7668150"
+  const adminId = "c3017dce-c447-4956-bb13-63bf8e293070"
 
   const showButton = () => {
     if (window.innerWidth <= 960) {

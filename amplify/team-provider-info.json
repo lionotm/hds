@@ -12,14 +12,14 @@
       "AmplifyAppId": "d5lnn4vwtx8z1"
     },
     "categories": {
-      "auth": {
-        "hdsc6c644fa": {}
-      },
       "hosting": {
         "amplifyhosting": {
           "appId": "d5lnn4vwtx8z1",
           "type": "cicd"
         }
+      },
+      "auth": {
+        "hdse53ade48": {}
       }
     }
   }

@@ -18,7 +18,7 @@
     }
   },
   "auth": {
-    "hdsc6c644fa": {
+    "hdse53ade48": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
