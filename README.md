@@ -5,13 +5,6 @@ This is a POC project to create a booking system prototype to assist with the bo
 ## POC Demo
 
 
-## To Install
-
-In the project directory, you can run:
-
-### `npm i`
-### `npm start`
-
 ## Features
 - Social signin/signup using AWS Cognito
 - Login into booking page
@@ -27,3 +20,11 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
+
+## To Install
+
+In the project directory, you can run:
+```
+npm i
+npm start
+```
