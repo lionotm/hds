@@ -14,11 +14,12 @@ https://main.d5lnn4vwtx8z1.amplifyapp.com
 - CI/CD with AWS Amplify & GitHub
 
 ## Cloud Stack
+![Cloudstack](https://github.com/lionotm/hds/blob/main/HDSarch.png?raw=true)
 
 - AWS Amplify
 - AWS AppSync + GraphQL
 - AWS Cognito
-- AWS DynaoDB
+- AWS DynamoDB
 
 ## Known Issues
 - AWS GraphQL schema automatic updates results in missing field after every publish which causes some failed queries. Have to edit the schema manually in Appsync console.
