@@ -1,6 +1,6 @@
 # Introduction
 
-This is a POC project to create a booking system prototype to assist with the booking of share resources. It is targeted at reducing inefficiencies to due unable to find a right space.
+This is a POC project to create a booking system prototype to assist with the booking of share resources. It is targeted at reducing inefficiencies due to hassle of finding a right space.
 
 ## POC Demo
 https://main.d5lnn4vwtx8z1.amplifyapp.com 
