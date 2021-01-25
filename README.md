@@ -22,7 +22,7 @@ https://main.d5lnn4vwtx8z1.amplifyapp.com
 - AWS DynamoDB
 
 ## Known Issues
-- AWS GraphQL schema automatic updates results in missing field after every publish which causes some failed queries. Have to edit the schema manually in Appsync console.
+- AWS GraphQL schema updates result in missing a missing filter input field after every publish which causes some failed queries. Have to edit the schema manually in Appsync console.
 
 ## Features to add
 - Admin can block out whole day/days
